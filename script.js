@@ -5,22 +5,24 @@ function shuffle(array) {
     }
 }
 
-const clipes = ["clipes/anti-hero.mp4", "clipes/bad blood.mp4", "clipes/bejeweled.mp4", "clipes/blank space.mp4", "clipes/lover.mp4", "clipes/me.mp4", "clipes/shake it off.mp4", "clipes/willow.mp4", "clipes/you belong with me.mp4", "clipes/you need to calm down.mp4", "clipes/the story of us.mp4"]
-const repostas = ["anti-hero", "bad blood", "bejeweled", "blank space", "lover", "me", "shake it off", "willow", "you belong with me", "you need to calm down", "style", "enchanted", "all of the girls you loved before", "you're not sorry", "karma", "august", "midnight rain", "the way i loved you", "love story", "paper rings", "delicate", "hits different", "sweet nothing", "tolerate it", "fearless", "evermore", "paris", "better man", "ours", "you are in love", "never grow up", "innocent", "drive", "the story of us"]
+const clipes = ["clipes/anti-hero.mp4", "clipes/bad blood.mp4", "clipes/bejeweled.mp4", "clipes/blank space.mp4", "clipes/lover.mp4", "clipes/me.mp4", "clipes/shake it off.mp4", "clipes/willow.mp4", "clipes/you belong with me.mp4", "clipes/you need to calm down.mp4", "clipes/the story of us.mp4", "clipes/the man.mp4"]
+const repostas = ["anti-hero", "bad blood", "bejeweled", "blank space", "lover", "me", "shake it off", "willow", "you belong with me", "you need to calm down", "style", "enchanted", "all of the girls you loved before", "you're not sorry", "karma", "august", "midnight rain", "the way i loved you", "the man", "love story", "paper rings", "delicate", "hits different", "sweet nothing", "tolerate it", "fearless", "evermore", "paris", "better man", "ours", "you are in love", "never grow up", "innocent", "drive", "the story of us"]
+var j = 0
 $('ul').hide();
 $('#todos').click(function (e) {
     shuffle(clipes)
-    let j = 0
     $('video').attr('src', clipes[j])
     $('#menu').hide()
     $('#main').show()
 })
 
 $('#diario').click(function (e) {
-    let j = clipes.length - 1
-    $('video').attr('src', clipes[j])
+    let z = clipes.length - 1
+    $('video').attr('src', clipes[z])
     $('#menu').hide()
     $('#main').show()
+    $('#next').hide()
+    $('#btn').css('bottom', '50px')
 })
 
 t = ""
