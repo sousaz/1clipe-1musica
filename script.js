@@ -5,8 +5,8 @@ function shuffle(array) {
     }
 }
 
-const clipes = ["clipes/anti-hero.mp4", "clipes/bad blood.mp4", "clipes/bejeweled.mp4", "clipes/blank space.mp4", "clipes/lover.mp4", "clipes/me.mp4", "clipes/shake it off.mp4", "clipes/willow.mp4", "clipes/you belong with me.mp4", "clipes/you need to calm down.mp4", "clipes/the story of us.mp4", "clipes/the man.mp4", "clipes/we are never ever getting back together.mp4", "clipes/look what you made me do.mp4"]
-const repostas = ["anti-hero", "bad blood", "bejeweled", "blank space", "lover", "me", "look what you made me do", "shake it off", "willow", "you belong with me", "you need to calm down", "style", "enchanted", "all of the girls you loved before", "you're not sorry", "karma", "august", "midnight rain", "the way i loved you", "the man", "love story", "we are never ever getting back together", "paper rings", "delicate", "hits different", "sweet nothing", "tolerate it", "fearless", "evermore", "paris", "better man", "ours", "you are in love", "never grow up", "innocent", "drive", "the story of us"]
+const clipes = ["clipes/anti-hero.mp4", "clipes/bad blood.mp4", "clipes/bejeweled.mp4", "clipes/blank space.mp4", "clipes/lover.mp4", "clipes/me.mp4", "clipes/shake it off.mp4", "clipes/willow.mp4", "clipes/you belong with me.mp4", "clipes/you need to calm down.mp4", "clipes/the story of us.mp4", "clipes/the man.mp4", "clipes/we are never ever getting back together.mp4", "clipes/look what you made me do.mp4", "clipes/begin again.mp4"]
+const repostas = ["anti-hero", "begin again", "bad blood", "bejeweled", "blank space", "lover", "me", "look what you made me do", "shake it off", "willow", "you belong with me", "you need to calm down", "style", "enchanted", "all of the girls you loved before", "you're not sorry", "karma", "august", "midnight rain", "the way i loved you", "the man", "love story", "we are never ever getting back together", "paper rings", "delicate", "hits different", "sweet nothing", "tolerate it", "fearless", "evermore", "paris", "better man", "ours", "you are in love", "never grow up", "innocent", "drive", "the story of us"]
 var j = 0
 $('ul').hide();
 $('#todos').click(function (e) {
