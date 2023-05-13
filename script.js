@@ -9,11 +9,16 @@ const clipes = ["clipes/anti-hero.mp4", "clipes/bad blood.mp4", "clipes/bejewele
 const repostas = ["anti-hero", "begin again", "bad blood", "bejeweled", "blank space", "lover", "me", "look what you made me do", "shake it off", "willow", "you belong with me", "you need to calm down", "style", "enchanted", "all of the girls you loved before", "you're not sorry", "karma", "august", "midnight rain", "the way i loved you", "the man", "love story", "we are never ever getting back together", "paper rings", "delicate", "hits different", "sweet nothing", "tolerate it", "fearless", "evermore", "paris", "better man", "ours", "you are in love", "never grow up", "innocent", "drive", "the story of us", "everything has changed"]
 var j = 0
 $('ul').hide();
+$('#main').hide();
+$('#pontuacao').hide();
+$('#escolher').hide()
+
 $('#todos').click(function (e) {
     shuffle(clipes)
     $('video').attr('src', clipes[j])
     $('#menu').hide()
     $('#main').show()
+    $('#pontuacao').show();
 })
 
 $('#diario').click(function (e) {
@@ -22,18 +27,18 @@ $('#diario').click(function (e) {
     $('#menu').hide()
     $('#main').show()
     $('#next').hide()
-    $('#btn').css('bottom', '50px')
 })
+
 
 t = ""
 for(i in repostas) {
-    t += "<li>"+ "<a href='#'>" +repostas[i]+ "</a>" +"</li>"
+    t += "<li class='list-group-item'>"+ "<a class='itenss' href='#'>" +repostas[i]+ "</a>" +"</li>"
 }
 
 lista.innerHTML = t
 
 
-$('input').keyup(function (e)  {
+$('#resposta').keyup(function (e)  {
     let filtro = $(this).val().toLowerCase() 
     let menu = $('#lista')
     let menuitens = $('li')
@@ -42,10 +47,9 @@ $('input').keyup(function (e)  {
     } else {
         $('ul').show();
     }
-    
 
     for (let i = 0; i < menuitens.length; i++) {
-        links =  menuitens[i].getElementsByTagName("a")[0]
+        links =  menuitens[i].getElementsByClassName('itenss')[0]
         $(menuitens[i]).css('display', 'block')
         if(links.innerHTML.toLowerCase().indexOf(filtro) > -1) {
             $(menuitens[i]).css('display', 'block')
@@ -55,45 +59,56 @@ $('input').keyup(function (e)  {
     }
 })
 
-$('a').click(function(e) {
+$('.itenss').click(function(e) {
     let item = $(this).html()
-    $('input').val(item)
+    $('#resposta').val(item)
     $('ul').hide();
 
 })
 
 var respondido = false
+var dica = false
+var pontos = false
 
-$('#confirm').click(function(e) {
+$('#confirmar').click(function(e) {
     let repostaCerta = $('video').attr('src')
     repostaCerta = repostaCerta.split(".")
     repostaCerta = repostaCerta[0].split("/")
 
-    if($('input').val() != ""){
+    if($('#resposta').val() != ""){
         $('ul').hide();
-        if(repostaCerta[1].toLowerCase() === $('input').val()) {
+        if(repostaCerta[1].toLowerCase() === $('#resposta').val()) {
             $('#main').css('border', '4px solid green')
             respondido = true
-            $('input').attr('disabled', 'disabled')
+            $('#resposta').attr('disabled', 'disabled')
+            pontuacao()
         } else {
             $('#main').css('border', '4px solid red')
             respondido = true
-            $('input').attr('disabled', 'disabled')
+            $('#resposta').attr('disabled', 'disabled')
         }
+        $('#next').removeAttr('disabled')
     }
-    
 })
 
 
 $('#next').click(e => {
+    $('#next').attr('disabled', 'disabled')
     if (respondido){
         $('video').attr("src", clipes[++j])
     }
+    dica = false
     respondido = false
-    $('input').removeAttr('disabled')
-    $('input').val("")
+    pontos = false
+    $('#resposta').removeAttr('disabled')
+    $('#resposta').val("")
     $('ul').hide();
-    $('#main').css('border', '2px solid black')
+    $('#main').css('border', '1px solid rgba(255, 255, 255, 0.15)')
+    if(j >= clipes.length){
+        $('#resposta').attr('disabled', 'disabled')
+        $('#next').attr('disabled', 'disabled')
+        $('#confirmar').attr('disabled', 'disabled')
+    }
 })
 
 $('#dica').click(e => {
@@ -103,8 +118,59 @@ $('#dica').click(e => {
     caminho = "audios/" + caminho[1] + ".mp4"
     $('audio').attr('src', caminho)
     $('audio').attr('autoplay', 'loop')
+    dica = true
+})
+
+$('#darkMode').click(e => {
+    const body = $('body')
+    let valor = body.attr('data-bs-theme');
+    valor = valor == "light" ? "dark" : "light"
+    body.attr('data-bs-theme', valor)
+})
+
+function pontuacao() {
+    if(!dica && !pontos) {
+        let valorAtual = parseInt($('#score').html())
+        valorAtual = valorAtual + 2;
+        $('#score').html(valorAtual)
+    } else if (dica && !pontos) {
+        let valorAtual = parseInt($('#score').html())
+        valorAtual++;
+        $('#score').html(valorAtual)
+    }
+    pontos = true
+}
+
+$('#choose').click(e => {
+    $('#menu').hide()
+    $('#main').hide()
+    $('#escolher').show();
+    $('#listaEscolha').show()
+    
+    t = ""
+    for(i in clipes) {
+        t += "<li class='list-group-item d-flex justify-content-center'>"+ "<a class='escolhas' href='#'>" +"Clipe: " +i + "</a>" +"</li>"
+    }
+
+    listaEscolha.innerHTML = t
+
+
+    $('.escolhas').click(function(e) {
+        let numero = $(this).html()
+        numero = numero.split(':')
+        console.log(numero)
+        const indice = parseInt(numero[1])
+        $('#escolher').hide();
+        $('#main').show()
+        $('video').attr('src', clipes[indice])
+        $('#next').hide()
+
+    })
 
 })
+
+
+
 
 
 
