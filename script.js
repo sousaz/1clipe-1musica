@@ -169,6 +169,12 @@ $('#choose').click(e => {
 
 })
 
+$(document).keydown(function(e) {
+    if(e.which === 27) {
+        location.reload()
+    }
+})
+
 
 
 
